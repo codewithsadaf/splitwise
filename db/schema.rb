@@ -10,10 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_06_083940) do
+ActiveRecord::Schema.define(version: 2024_03_26_102756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "expense_shares", force: :cascade do |t|
+    t.bigint "expense_id", null: false
+    t.bigint "participant_id", null: false
+    t.decimal "amount_owed", precision: 10, scale: 2, default: "0.0", null: false
+    t.string "category", default: "owed", null: false
+    t.boolean "is_settled", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["expense_id"], name: "index_expense_shares_on_expense_id"
+    t.index ["participant_id"], name: "index_expense_shares_on_participant_id"
+  end
+
+  create_table "expenses", force: :cascade do |t|
+    t.bigint "payor_id", null: false
+    t.decimal "amount", precision: 10, scale: 2, default: "0.0", null: false
+    t.text "description"
+    t.date "date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["payor_id"], name: "index_expenses_on_payor_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -29,4 +51,7 @@ ActiveRecord::Schema.define(version: 2021_10_06_083940) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "expense_shares", "expenses"
+  add_foreign_key "expense_shares", "users", column: "participant_id"
+  add_foreign_key "expenses", "users", column: "payor_id"
 end
