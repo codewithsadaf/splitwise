@@ -17,6 +17,16 @@ class ExpensesController < ApplicationController
     end
   end
 
+  def destroy
+    @expense = Expense.find(params[:id])
+
+    if @expense.destroy
+      redirect_back(fallback_location: root_path, notice: 'Expense was successfully deleted.')
+    else
+      redirect_to root_path, alert: 'Unable to delete this expense.'
+    end
+  end
+
   private
 
   def expense_params

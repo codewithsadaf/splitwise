@@ -9,4 +9,8 @@ class User < ApplicationRecord
   has_many :expenses_paid, foreign_key: 'payor_id', class_name: 'Expense', dependent: :destroy
   has_many :expense_shares, foreign_key: 'participant_id', dependent: :destroy
   has_many :shared_expenses, through: :expense_shares, source: :expense
+
+  def name_or_email
+    name.presence || email
+  end
 end

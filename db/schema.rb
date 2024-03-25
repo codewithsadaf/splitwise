@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2024_03_26_102756) do
     t.bigint "expense_id", null: false
     t.bigint "participant_id", null: false
     t.decimal "amount_owed", precision: 10, scale: 2, default: "0.0", null: false
-    t.string "category", default: "owed", null: false
+    t.integer "category", null: false
     t.boolean "is_settled", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

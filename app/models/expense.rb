@@ -10,6 +10,12 @@ class Expense < ApplicationRecord
 
   after_initialize :set_default_date, if: :new_record?
 
+  scope :user_expenses, lambda { |payor, participant|
+    where(payor: payor)
+      .joins(:expense_shares)
+      .where(expense_shares: { participant: participant })
+  }
+
   private
 
   def set_default_date

@@ -1,0 +1,5 @@
+.friends-list
+  a.fw-bold.my-4.friend-name(class=(current_page?(root_path) ? 'active' : '') href="/", title="My Profile") My Profile
+  p.friends-list-header FRIENDS
+  - friends.each do |friend|
+    a.friend-name(class=(current_page?(person_path(friend.id)) ? 'active' : '') href="/people/#{friend.id}", title=friend.name_or_email) = friend.name_or_email
