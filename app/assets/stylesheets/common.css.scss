@@ -1,0 +1,12 @@
+.text-red {
+  color: red;
+}
+
+.text-green {
+  color: green;
+}
+
+.required-asterisk::after {
+  content: " *";
+  color: red;
+}

@@ -13,6 +13,7 @@ window.$ = jQuery
 window.jQuery = jQuery
 
 import 'bootstrap/dist/js/bootstrap'
+import 'chosen-js';
 require("jgrowl")
 Rails.start()
 Turbolinks.start()

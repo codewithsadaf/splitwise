@@ -5,11 +5,7 @@
       a.friend-name anbu
       a.friend-name barath
   .main-area
-    .top-bar
-      h1.top-bar-title Dashboard
-      .top-bar-actions
-        button.btn.btn-primary type="button" data-bs-toggle="modal" data-bs-target="#expenseModal"  Add an expense
-        button.btn.btn-secondary type="button"  Settle up
+    = render 'nav_bar'
 
     .dashboard-balances
       .balances-bar
@@ -47,14 +43,4 @@
             .user-info
               p anbu
               p owes you $11.50
-#expenseModal.modal.fade aria-hidden="true" aria-labelledby="expenseModalLabel" tabindex="-1" 
-  .modal-dialog
-    .modal-content
-      .modal-header
-        h5#expenseModalLabel.modal-title Add an expense
-        button.btn-close aria-label="Close" data-bs-dismiss="modal" type="button" 
-      .modal-body
-        | Fields to be added
-      .modal-footer
-        button.btn.btn-secondary data-bs-dismiss="modal" type="button"  Close
-        button.btn.btn-primary type="button"  Save changes
+= render 'expense_modal'
