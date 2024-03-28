@@ -1,0 +1,23 @@
+.chosen-container {
+  width: 100% !important;
+  .chosen-results {
+    li.highlighted {
+      background-color: transparent;
+      background-image: transparent;
+      color: #444;
+    }
+  }
+  &.chosen-container-multi {
+    .chosen-choices {
+      li {
+        span {
+          display: inline-block;
+        }
+        .search-choice-close {
+          background: asset-url('chosen-cross.svg') 0px 0px no-repeat !important;
+          background-size: 10px !important;
+        }
+      }
+    }
+  }
+}

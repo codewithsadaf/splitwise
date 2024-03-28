@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require bootstrap/dist/css/bootstrap
+ *= require chosen-js/chosen
  *= require 'jgrowl'
  *= require_self
  */

@@ -1,49 +1,35 @@
 .dashboard-wrapper
   aside.side-bar-area
-    .friends-list
-      p.friends-list-header FRIENDS
-      a.friend-name anbu
-      a.friend-name barath
+    = render 'friends_list', friends: @friends
   .main-area
-    .top-bar
-      h1.top-bar-title Dashboard
-      .top-bar-actions
-        button.btn.btn-primary type="button"  Add an expense
-        button.btn.btn-secondary type="button"  Settle up
+    = render 'nav_bar'
+
     .expenses-list
-      .expense-item
-        .item-lhs
-          p SEP 30
-          p Hello
-        .item-rhs
-          .you-details
-            p you paid
-            p $23.00
-          .you-details
-            p you lent anbu
-            p $11.50
-        button.remove-btn ❌
-      .expense-item
-        .item-lhs
-          p SEP 30
-          p Hello
-        .item-rhs
-          .you-details
-            p you paid
-            p $23.00
-          .you-details
-            p you lent anbu
-            p $11.50
-        button.remove-btn ❌
-      .expense-item
-        .item-lhs
-          p SEP 30
-          p Hello
-        .item-rhs
-          .you-details
-            p you paid
-            p $23.00
-          .you-details
-            p you lent anbu
-            p $11.50
-        button.remove-btn ❌
+      - if @expenses_paid_by_current_user.present? || @expenses_paid_by_friend.present?
+        - (@expenses_paid_by_current_user + @expenses_paid_by_friend).each do |expense|
+          .expense-item
+            .item-lhs
+              p = expense.date.strftime("%b %d")
+              p = expense.description.presence || '-'
+            .item-rhs
+            - if expense.payor_id == current_user.id
+              .you-details.px-5
+                p you paid
+                p = number_to_currency(expense.amount)
+              - expense_share = expense.expense_shares.find_by(participant_id: @user.id)
+              .you-details.px-5
+                p = "you lent #{expense_share.participant.name_or_email}"
+                p = number_to_currency(expense_share.amount_owed)
+            - else
+              .you-details.px-5
+                p = "#{expense.payor.email} paid"
+                p = number_to_currency(expense.amount)
+              .you-details.px-5
+                p lent you
+                p = number_to_currency(expense.expense_shares.find_by(participant: current_user)&.amount_owed)
+            = link_to '❌', expense_path(expense), method: :delete, class: 'remove-btn', data: { confirm: 'Do you want to delete this expense?' }
+      - else
+        .expense-item
+          p No expenses to show
+
+= render 'expense_modal'

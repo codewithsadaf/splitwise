@@ -1855,6 +1855,11 @@
   optionalDependencies:
     "fsevents" "~2.3.2"
 
+"chosen-js@^1.8.7":
+  "integrity" "sha512-eVdrZJ2U5ISdObkgsi0od5vIJdLwq1P1Xa/Vj/mgxkMZf14DlgobfB6nrlFi3kW4kkvKLsKk4NDqZj1MU1DCpw=="
+  "resolved" "https://registry.npmjs.org/chosen-js/-/chosen-js-1.8.7.tgz"
+  "version" "1.8.7"
+
 "chownr@^1.1.1":
   "integrity" "sha512-jJ0bqzaylmJtVnNgzTeSOs8DPavpbYgEr/b0YL8/2GO3xJEhInFmhKMUnEJQjZumK7KXGFhUy89PrsJWlakBVg=="
   "resolved" "https://registry.npmjs.org/chownr/-/chownr-1.1.4.tgz"

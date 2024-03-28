@@ -1,0 +1,23 @@
+= form_with model: @expense, url: expenses_path, method: :post, remote: true do |form|
+  .form-group.mt-2
+    = form.label :payor_id, 'Paid By:', class: 'form-label required-asterisk'
+    = form.collection_select :payor_id, User.all, :id, :email, {include_blank: 'Please Select', required: true}, {class: 'form-control'}
+
+  .form-group.mt-2
+    = form.label :participant_ids, 'Participants:', class: 'form-label required-asterisk'
+    = form.select :participant_ids, options_from_collection_for_select(User.all, :id, :email, @expense.participant_ids), {}, {multiple: true, required: true, class: 'form-control chosen-select'}
+
+  .form-group.mt-2
+    = form.label :amount, 'Total Amount', class: 'form-label required-asterisk'
+    = form.number_field :amount, required: true, class: 'form-control'
+
+  .form-group.mt-2
+    = form.label :description, 'Description', class: 'form-label'
+    = form.text_area :description, class: 'form-control'
+
+  .form-group.mt-2
+    = form.label :date, 'Date', class: 'form-label'
+    = form.date_field :date, class: 'form-control'
+
+  .actions
+    = form.submit 'Add Expense', class: 'btn btn-primary mt-4'
